@@ -9,6 +9,10 @@ RUN apk update && \
       git
 
 RUN npm install -g npm@7.5.1
+
+COPY package.json $BASE_PATH/.
+COPY package-lock.json $BASE_PATH/.
+
 RUN npm install
 
-CMD ["npx", "http-server", "$BASE_PATH/src"]
+CMD ["node", "src/server/index.js"]
