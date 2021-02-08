@@ -9,6 +9,14 @@ app.get('/', (req, res) => {
   res.render('index')
 })
 
+app.get('/bundle.js', (req, res) => {
+  res.sendFile('/var/app/dist/bundle.js')
+})
+
+app.get('/global.css', (req, res) => {
+  res.sendFile('/var/app/css/global.css')
+})
+
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })

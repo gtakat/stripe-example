@@ -1,6 +1,15 @@
 html 
   head 
     title= "Stripe Demo"
+    script(src="/bundle.js")
+    link(rel="stylesheet" href="/global.css")
   body 
     h1= "Stripe Demo"
-    
+    form(id="payment-form")
+      div(id="card-element")
+      button(id="submit")
+        div(class="spinner hidden" id="spinner")
+        span(id="button-text") Pay 
+      p(id="card-error" role="alert")
+      p(class="result-message hidden") Payment succeeded, see the result in your
+        a(href="" target="_blank") Stripe dashboard.
