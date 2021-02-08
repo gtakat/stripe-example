@@ -9,7 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "http-server": "^0.12.3"
+    "http-server": "^0.12.3",
+    "stripe": "^8.134.0"
   },
   "devDependencies": {
     "babel": "^6.23.0",

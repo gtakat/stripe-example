@@ -9,5 +9,6 @@ RUN apk update && \
       git
 
 RUN npm install -g npm@7.5.1
+RUN npm install
 
 CMD ["npx", "http-server", "$BASE_PATH/src"]
