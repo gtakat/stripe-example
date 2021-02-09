@@ -1,3 +1,6 @@
+require('dotenv').config({ path: __dirname + '/.env' });
+const webpack = require('webpack');
+
 module.exports = {
   mode: 'development',
   entry: './src/client/index.js',
@@ -26,5 +29,12 @@ module.exports = {
       http: "stream-http",
       stream: "stream-browserify"
     }
-  }
+  },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        STRIPE_PUBLIC_KEY: JSON.stringify(process.env.STRIPE_PUBLIC_KEY)
+      }
+    })
+  ]
 };

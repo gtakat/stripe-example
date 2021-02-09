@@ -1,7 +1,7 @@
 import {loadStripe} from '@stripe/stripe-js';
 
 async function init() {
-  const stripe_public_key = ''
+  const stripe_public_key = process.env.STRIPE_PUBLIC_KEY
   const stripe = await loadStripe(stripe_public_key)
   console.log(stripe)
   
