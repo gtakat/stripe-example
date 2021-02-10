@@ -23,20 +23,20 @@ async function init() {
     .then(function(result) {
       return result.json()
     })
-    .then(function(data) {
-      console.log(data)
-    })
+  //   .then(function(data) {
+  //     console.log(data)
+  //   })
 
-  fetch("/setup-intent", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({})
-  })
-    .then(function(result) {
-      return result.json()
-    })
+  // fetch("/setup-intent", {
+  //   method: "POST",
+  //   headers: {
+  //     "Content-Type": "application/json"
+  //   },
+  //   body: JSON.stringify({})
+  // })
+  //   .then(function(result) {
+  //     return result.json()
+  //   })
   //   .then(function(data) {
   //     console.log(data)
   //   })
@@ -81,12 +81,12 @@ async function init() {
         // payWithCard(stripe, card, data.clientSecret);
         console.log(888)
         console.log(data)
-        registerCard(stripe, card, data.result.client_secret)
+        registerCard(stripe, card)
       });
     });
 }
 
-const registerCard = function(stripe, card, clientSecret) {
+const registerCard = function(stripe, card) {
   console.log("card")
   console.log(card)
   loading(true)

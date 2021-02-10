@@ -38,11 +38,28 @@ app.post("/setup-intent", async (req, res) => {
 })
 
 app.post("/attach-paymento-to-customer", async (req, res) => {
+  
+  // const customer_id = "cus_IuyjKHylXczk65"
+
   const { payment_method_id } = req.body;
+
+  const customer = await stripe.customers.create({
+    name: "吉田 花子"
+  });
+
   const paymentMethod = await stripe.paymentMethods.attach(
     payment_method_id,
-    {customer: 'cus_IuyjKHylXczk65'}
+    {customer: customer.id}
   );
+
+  await stripe.customers.update(
+    customer.id,
+    {
+      invoice_settings: {
+        default_payment_method: payment_method_id
+      }
+    }
+  )
 
   res.send({
     result: paymentMethod
