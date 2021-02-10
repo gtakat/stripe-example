@@ -11,16 +11,46 @@ async function init() {
   
   document.querySelector("button").disabled = true
 
-  fetch("/create-payment-intent", {
+  fetch("/create-customer", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify(purchase)
+    body: JSON.stringify({
+      name: "鈴木 二郎"
+    })
   })
     .then(function(result) {
-      return result.json();
+      return result.json()
     })
+    .then(function(data) {
+      console.log(data)
+    })
+
+  fetch("/setup-intent", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({})
+  })
+    .then(function(result) {
+      return result.json()
+    })
+  //   .then(function(data) {
+  //     console.log(data)
+  //   })
+
+  // fetch("/create-payment-intent", {
+  //   method: "POST",
+  //   headers: {
+  //     "Content-Type": "application/json"
+  //   },
+  //   body: JSON.stringify(purchase)
+  // })
+  //   .then(function(result) {
+  //     return result.json();
+  //   })
     .then(function(data) {
       const elements = stripe.elements();
       const style = {
@@ -48,9 +78,65 @@ async function init() {
       const form = document.getElementById("payment-form");
       form.addEventListener("submit", function(event) {
         event.preventDefault();
-        payWithCard(stripe, card, data.clientSecret);
+        // payWithCard(stripe, card, data.clientSecret);
+        console.log(888)
+        console.log(data)
+        registerCard(stripe, card, data.result.client_secret)
       });
     });
+}
+
+const registerCard = function(stripe, card, clientSecret) {
+  console.log("card")
+  console.log(card)
+  loading(true)
+  // stripe
+  //   .confirmCardSetup(clientSecret, {
+  //     card: card
+  //   })
+  //   .then(function(result) {
+  //     console.log("card register result")
+  //     console.log(result)
+  //     if (result.error) {
+  //       showError(result.error.message);
+  //     } else {
+  //       orderComplete(result.setupIntent.id);
+  //     }
+  //   });
+  stripe
+    .createPaymentMethod({
+      type: 'card',
+      card: card,
+    })
+    .then(function(result) {
+      console.log("card register result")
+      console.log(result)
+      if (result.error) {
+        showError(result.error.message);
+      } else {
+        // orderComplete(result.setupIntent.id);
+        attachCard(stripe, result.paymentMethod)
+      }
+    });
+}
+
+const attachCard = function(stripe, paymentMethod)
+{
+  fetch("/attach-paymento-to-customer", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      payment_method_id: paymentMethod.id
+    })
+  })
+    .then(function(result) {
+      return result.json()
+    })
+    .then(function(data) {
+      console.log(data)
+    })
 }
 
 const payWithCard = function(stripe, card, clientSecret) {
