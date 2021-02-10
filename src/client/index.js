@@ -69,7 +69,10 @@ async function init() {
           iconColor: "#fa755a"
         }
       };
-      const card = elements.create("card", { style: style });
+      const card = elements.create("card", { 
+        hidePostalCode: true,
+        style: style 
+      });
       card.mount("#card-element");
       card.on("change", function (event) {
         document.querySelector("button").disabled = event.empty;
