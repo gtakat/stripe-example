@@ -44,7 +44,7 @@ app.post("/attach-paymento-to-customer", async (req, res) => {
   const { payment_method_id } = req.body;
 
   const customer = await stripe.customers.create({
-    name: "吉田 花子"
+    name: "吉田 花子2"
   });
 
   const paymentMethod = await stripe.paymentMethods.attach(
