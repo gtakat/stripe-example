@@ -1,4 +1,5 @@
 const express = require('express')
+const customer_router = require('./router/customer')
 const app = express()
 const port = 8080
 
@@ -8,6 +9,7 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 app.set('view engine', 'pug')
 
 app.use(express.json());
+app.use(express.static('public'))
 
 const calculateOrderAmount = items => (1400)
 
@@ -82,13 +84,7 @@ app.get('/', (req, res) => {
   res.render('index')
 })
 
-app.get('/bundle.js', (req, res) => {
-  res.sendFile('/var/app/dist/bundle.js')
-})
-
-app.get('/global.css', (req, res) => {
-  res.sendFile('/var/app/css/global.css')
-})
+app.use('/customer', customer_router)
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
