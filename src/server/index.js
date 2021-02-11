@@ -46,25 +46,44 @@ app.post("/attach-paymento-to-customer", async (req, res) => {
   const { payment_method_id } = req.body;
 
   const customer = await stripe.customers.create({
-    name: "吉田 花子2"
-  });
-
-  const paymentMethod = await stripe.paymentMethods.attach(
-    payment_method_id,
-    {customer: customer.id}
-  );
-
-  await stripe.customers.update(
-    customer.id,
-    {
-      invoice_settings: {
-        default_payment_method: payment_method_id
-      }
+    name: "吉田 花子2",
+    payment_method: payment_method_id,
+    invoice_settings: {
+      default_payment_method: payment_method_id
     }
-  )
+  })
+
+  // const paymentMethod = await stripe.paymentMethods.attach(
+  //   payment_method_id,
+  //   {customer: customer.id}
+  // )
+
+  // await stripe.customers.update(
+  //   customer.id,
+  //   {
+  //     invoice_settings: {
+  //       default_payment_method: payment_method_id
+  //     }
+  //   }
+  // )
+
+  const paymentIntent = await stripe.paymentIntents.create({
+    amount: 2000,
+    currency: 'jpy',
+    payment_method_types: ['card'],
+    capture_method: 'manual', // デフォルトだと caputureの呼び出しは不要
+    customer: customer.id,
+    payment_method: payment_method_id,
+    confirm: false  // trueだとconfirmの呼び出しが必要
+  })
+
+  const confirmResult = await stripe.paymentIntents.confirm(paymentIntent.id)
+  
+  const caputureResult = await stripe.paymentIntents.capture(paymentIntent.id)
+
 
   res.send({
-    result: paymentMethod
+    result: caputureResult
   })
 })
 
