@@ -14,3 +14,9 @@ services:
       - .:/var/app
     ports:
       - 8080:8080
+  stripe:
+    image: stripe/stripe-cli:latest
+    tty: true
+    stdin_open: true
+    volumes:
+      - ./.config:/root/.config
