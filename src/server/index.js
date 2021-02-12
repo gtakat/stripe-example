@@ -1,3 +1,4 @@
+const { request } = require('express');
 const express = require('express')
 const customer_router = require('./router/customer')
 const app = express()
@@ -41,12 +42,12 @@ app.post("/setup-intent", async (req, res) => {
 
 app.post("/attach-paymento-to-customer", async (req, res) => {
   
-  // const customer_id = "cus_IuyjKHylXczk65"
+  // const customer_id = "cus_IvrgJVGNE481aq"
 
   const { payment_method_id } = req.body;
 
   const customer = await stripe.customers.create({
-    name: "吉田 花子2",
+    name: "吉田 花子5",
     payment_method: payment_method_id,
     invoice_settings: {
       default_payment_method: payment_method_id
@@ -67,23 +68,54 @@ app.post("/attach-paymento-to-customer", async (req, res) => {
   //   }
   // )
 
+  // try {
+  //   let paymentIntent
+
+  //   if (request.body.payment_method_id) {
+  //     paymentIntent = await stripe.paymentIntents.create({
+  //       amount: 2000,
+  //       currency: 'jpy',
+  //       payment_method_types: ['card'],
+  //       capture_method: 'automatic', 
+  //       // capture_method: 'manual', // デフォルト(automatic)だと caputureの呼び出しは不要
+  //       customer: customer_id,
+  //       payment_method: request.body.payment_method_id,
+  //       confirm: true  // falseだとconfirmの呼び出しが必要
+  //     })
+  //   } else if (request.body.payment_intent_id) {
+  //     paymentIntent = await stripe.paymentIntents.confirm(request.body.payment_intent_id)
+  //   } 
+
+  //   res.send({ result: paymentIntent })
+  // } catch (e) {
+  //   res.send({ error: e.message })
+  // }
+
+
+
+
+
   const paymentIntent = await stripe.paymentIntents.create({
     amount: 2000,
     currency: 'jpy',
     payment_method_types: ['card'],
-    capture_method: 'manual', // デフォルトだと caputureの呼び出しは不要
+    capture_method: 'automatic', 
+    // capture_method: 'manual', // デフォルト(automatic)だと caputureの呼び出しは不要
     customer: customer.id,
     payment_method: payment_method_id,
-    confirm: false  // trueだとconfirmの呼び出しが必要
+    confirm: true  // falseだとconfirmの呼び出しが必要
   })
+  console.log({status: paymentIntent.status})
 
-  const confirmResult = await stripe.paymentIntents.confirm(paymentIntent.id)
-  
-  const caputureResult = await stripe.paymentIntents.capture(paymentIntent.id)
+  // const confirmResult = await stripe.paymentIntents.confirm(paymentIntent.id)
+  // console.log({status: confirmResult.status})
+
+  // const caputureResult = await stripe.paymentIntents.capture(paymentIntent.id)
+  // console.log({status: caputureResult.status})
 
 
   res.send({
-    result: caputureResult
+    result: paymentIntent
   })
 })
 

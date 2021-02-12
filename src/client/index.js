@@ -143,7 +143,22 @@ const attachCard = function(stripe, paymentMethodId)
     })
     .then(function(data) {
       console.log(data)
+      if (data.result.status == 'requires_action') {
+        handleCardAction(stripe, data.result)
+      } else {
+        console.log("done")
+      }
     })
+}
+
+const handleCardAction = function(stripe, intent) {
+  console.log("handleCardAction")
+  console.log(intent)
+  stripe.confirmCardPayment(
+    intent.client_secret
+  ).then(function(actionResult) {
+    console.log(actionResult)
+  })
 }
 
 const payWithCard = function(stripe, card, clientSecret) {
