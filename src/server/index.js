@@ -7,6 +7,11 @@ const port = 8080
 require('dotenv').config();
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 
+// app.use(function(req, res, next) {
+//   res.setHeader('Content-Security-Policy', "default-src 'self'; connect-src 'self' https://api.stripe.com; frame-src https://js.stripe.com https://hooks.stripe.com; script-src 'self' 'unsafe-eval' https://js.stripe.com; form-action 'self' https://stripe.com https://hooks.stripe.com")
+//   next()
+// })
+
 app.set('view engine', 'pug')
 
 app.use(express.json());
