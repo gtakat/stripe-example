@@ -11,22 +11,6 @@ async function init() {
   
   document.querySelector("button").disabled = true
 
-  // fetch("/create-customer", {
-  //   method: "POST",
-  //   headers: {
-  //     "Content-Type": "application/json"
-  //   },
-  //   body: JSON.stringify({
-  //     name: "鈴木 二郎"
-  //   })
-  // })
-  //   .then(function(result) {
-  //     return result.json()
-  //   })
-  //   .then(function(data) {
-  //     console.log(data)
-  //   })
-
   fetch("/payment/setup-intent", {
     method: "POST",
     headers: {

@@ -9,22 +9,6 @@ router.get('/', (req, res) => {
   res.render('payment/index')
 })
 
-router.post("/create-customer", async (req, res) => {
-  const { name } = req.body
-  console.log(name)
-
-  // const customer = await stripe.customers.create({
-  //   name
-  // });
-  const customer = await stripe.customers.retrieve(
-    'cus_IuyjKHylXczk65'
-  );
-
-  res.send({
-    result: customer
-  })
-})
-
 router.post("/setup-intent", async (req, res) => {
   const setupIntent = await stripe.setupIntents.create({
     payment_method_types: ['card'],
@@ -36,24 +20,26 @@ router.post("/setup-intent", async (req, res) => {
 })
 
 router.post("/attach-payment-to-customer", async (req, res) => {
-  
-  // const customer_id = "cus_IvrgJVGNE481aq"
-
   const { payment_method_id } = req.body;
 
+  // customerが存在しない場合は、customerの作成+payment_methodの紐付け+デフォルトカード設定が同時に可能
   const customer = await stripe.customers.create({
-    name: "吉田 花子5",
+    name: "からあげ", 
     payment_method: payment_method_id,
     invoice_settings: {
       default_payment_method: payment_method_id
     }
   })
 
+  // customerがすでに存在する場合はpayment_methodの紐付けを行う
+
+  // payment_methodの紐付け
   // const paymentMethod = await stripe.paymentMethods.attach(
   //   payment_method_id,
   //   {customer: customer.id}
   // )
 
+  // デフォルトカード設定
   // await stripe.customers.update(
   //   customer.id,
   //   {
@@ -62,29 +48,6 @@ router.post("/attach-payment-to-customer", async (req, res) => {
   //     }
   //   }
   // )
-
-  // try {
-  //   let paymentIntent
-
-  //   if (request.body.payment_method_id) {
-  //     paymentIntent = await stripe.paymentIntents.create({
-  //       amount: 2000,
-  //       currency: 'jpy',
-  //       payment_method_types: ['card'],
-  //       capture_method: 'automatic', 
-  //       // capture_method: 'manual', // デフォルト(automatic)だと caputureの呼び出しは不要
-  //       customer: customer_id,
-  //       payment_method: request.body.payment_method_id,
-  //       confirm: true  // falseだとconfirmの呼び出しが必要
-  //     })
-  //   } else if (request.body.payment_intent_id) {
-  //     paymentIntent = await stripe.paymentIntents.confirm(request.body.payment_intent_id)
-  //   } 
-
-  //   res.send({ result: paymentIntent })
-  // } catch (e) {
-  //   res.send({ error: e.message })
-  // }
 
   const paymentIntent = await stripe.paymentIntents.create({
     amount: 2000,
