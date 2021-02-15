@@ -11,12 +11,21 @@ router.get('/', (req, res) => {
 
 router.post('/', async (req, res) => {
   const { payment_intent_id } = req.body
+  let result = {
+    refund: null,
+    error: false
+  }
 
-  const refund = await stripe.refunds.create({
-    payment_intent: payment_intent_id
-  })
+  try {
+    const refund = await stripe.refunds.create({
+      payment_intent: payment_intent_id
+    })
+    result.refund = refund
+  } catch (e) {
+    result.error = e
+  }
 
-  res.send({result: refund})
+  res.send(result)
 })
 
 module.exports = router
