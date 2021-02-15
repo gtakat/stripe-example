@@ -8,7 +8,7 @@ RUN apk update && \
     apk add --update --no-cache \
       git
 
-RUN npm install -g npm@7.5.1
+RUN npm install -g npm@7.5.4
 
 COPY package.json $BASE_PATH/.
 COPY package-lock.json $BASE_PATH/.
