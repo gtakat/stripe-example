@@ -15,9 +15,9 @@
     "stripe": "^8.134.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.12.13",
-    "@babel/core": "^7.12.13",
-    "@babel/preset-env": "^7.12.13",
+    "@babel/cli": "^7.12.16",
+    "@babel/core": "^7.12.16",
+    "@babel/preset-env": "^7.12.16",
     "babel-loader": "^8.2.2",
     "buffer": "^6.0.3",
     "core-js": "^3.8.3",
