@@ -27,7 +27,7 @@ async function init() {
   //     console.log(data)
   //   })
 
-  fetch("/setup-intent", {
+  fetch("/payment/setup-intent", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -128,7 +128,7 @@ const registerCard = function(stripe, card, clientSecret) {
 
 const attachCard = function(stripe, paymentMethodId)
 {
-  fetch("/attach-paymento-to-customer", {
+  fetch("/payment/attach-payment-to-customer", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
