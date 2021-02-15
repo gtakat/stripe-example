@@ -11,14 +11,21 @@ router.get('/', (req, res) => {
 
 router.post("/", async (req, res) => {
   const { name } = req.body
+  let result = {
+    customer: null,
+    error: false
+  }
 
-  const customer = await stripe.customers.create({
-    name
-  })
+  try {
+    const customer = await stripe.customers.create({
+      name
+    })
+    result.customer = customer
+  } catch (e) {
+    result.error = e
+  }
 
-  res.send({
-    result: customer
-  })
+  res.send(result)
 })
 
 module.exports = router
