@@ -15,4 +15,4 @@ COPY package-lock.json $BASE_PATH/.
 
 RUN npm install
 
-CMD ["node", "src/server/index.js"]
+CMD ["npx", "nodemon", "src/server/index.js"]
