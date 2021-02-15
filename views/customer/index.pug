@@ -1,0 +1,15 @@
+html 
+  head 
+    title= "Stripe Demo"
+    script(src="/js/customer.js")
+    link(rel="stylesheet" href="/css/global.css")
+  body 
+    h1= "Stripe Demo - Customer"
+    form(id="customer-form")
+      div(class="input-title")
+        =　"User Name"
+      input(id="user-name" type="text")
+      button(id="submit")
+        div(class="spinner hidden" id="spinner")
+        span(id="button-text") Create Customer
+      p(id="error" role="alert")

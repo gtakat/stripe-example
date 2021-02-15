@@ -4,6 +4,7 @@ const webpack = require('webpack');
 module.exports = {
   mode: 'development',
   entry: {
+    customer: './src/client/customer.js',
     payment: './src/client/payment.js',
     refund: './src/client/refund.js'
   },

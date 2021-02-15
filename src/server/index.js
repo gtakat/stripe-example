@@ -1,5 +1,6 @@
 const { request } = require('express');
 const express = require('express')
+const customer_router = require('./router/customer')
 const payment_router = require('./router/payment')
 const refund_router = require('./router/refund')
 
@@ -18,6 +19,7 @@ app.use(express.json());
 app.use(express.static('public'))
 
 // routing
+app.use('/customer', customer_router)
 app.use('/payment', payment_router)
 app.use('/refund', refund_router)
 
