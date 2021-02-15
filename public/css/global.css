@@ -50,7 +50,7 @@ input {
   display: none;
 }
 
-#card-error {
+#error {
   color: rgb(105, 115, 134);
   text-align: left;
   font-size: 13px;
@@ -169,4 +169,10 @@ button:disabled {
   form {
     width: 80vw;
   }
+}
+
+.input-title {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 6px;
 }

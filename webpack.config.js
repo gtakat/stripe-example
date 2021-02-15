@@ -3,10 +3,13 @@ const webpack = require('webpack');
 
 module.exports = {
   mode: 'development',
-  entry: './src/client/index.js',
+  entry: {
+    payment: './src/client/payment.js',
+    refund: './src/client/refund.js'
+  },
   output: {
     path: `${__dirname}/public/js`,
-    filename: 'bundle.js'
+    // filename: 'bundle.js'
   },
   module: {
     rules: [

@@ -1,6 +1,7 @@
 const { request } = require('express');
 const express = require('express')
 const customer_router = require('./router/customer')
+const refund_router = require('./router/refund')
 const app = express()
 const port = 8080
 
@@ -141,6 +142,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/customer', customer_router)
+app.use('/refund', refund_router)
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
