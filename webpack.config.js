@@ -5,6 +5,7 @@ module.exports = {
   mode: 'development',
   entry: {
     customer: './src/client/customer.js',
+    card: './src/client/card.js',
     payment: './src/client/payment.js',
     refund: './src/client/refund.js'
   },
