@@ -1,4 +1,4 @@
-import {loading, showComplete, showError, clearForm} from './form'
+import {loading, showComplete, showError, clearFormMessage} from './form'
 
 async function init() {
   const submitButton = document.querySelector("#submit")
@@ -12,7 +12,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 async function createCustomer(event) {
   event.preventDefault();
 
-  clearForm()
+  clearFormMessage()
 
   const userName = document.querySelector("#user-name").value
   if (!userName) {

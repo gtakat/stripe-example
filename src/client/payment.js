@@ -1,4 +1,4 @@
-import {loading, showComplete, showError, clearForm} from './form'
+import {loading, showComplete, showError, clearFormMessage} from './form'
 import {loadStripe} from '@stripe/stripe-js';
 
 async function init() {

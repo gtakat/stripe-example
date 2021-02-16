@@ -25,7 +25,7 @@ export function showError(message) {
   errorMsg.textContent = message
 }
 
-export function clearForm() {
+export function clearFormMessage() {
   document.querySelector(".result-message").textContent = ""
   document.querySelector("#error").textContent = ""
 }
