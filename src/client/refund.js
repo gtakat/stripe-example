@@ -22,7 +22,7 @@ async function refund(event) {
 
   loading(true)
   
-  fetch("/refund", {
+  await fetch("/refund", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"

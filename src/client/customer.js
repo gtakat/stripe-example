@@ -22,7 +22,7 @@ async function createCustomer(event) {
 
   loading(true)
 
-  fetch("/customer", {
+  await fetch("/customer", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
