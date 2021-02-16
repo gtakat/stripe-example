@@ -20,3 +20,5 @@ services:
     stdin_open: true
     volumes:
       - ./.config:/root/.config
+    depends_on: 
+      - app

@@ -4,6 +4,7 @@ require('dotenv').config();
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 
 const router = express.Router()
+router.use(express.json());
 
 router.get('/', (req, res) => {
   res.render('refund/index')
