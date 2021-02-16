@@ -4,107 +4,75 @@ import {loadStripe} from '@stripe/stripe-js';
 async function init() {
   const stripe_public_key = process.env.STRIPE_PUBLIC_KEY
   const stripe = await loadStripe(stripe_public_key)
-  
-  document.querySelector("button").disabled = true
 
-  fetch("/payment/setup-intent", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({})
+  const form = document.getElementById("payment-form")
+  form.addEventListener("submit", function(event) {
+    event.preventDefault()
+    pay(stripe)
   })
-    .then(function(result) {
-      return result.json()
-    })
-    .then(function(data) {
-      const elements = stripe.elements();
-      const style = {
-        base: {
-          color: "#32325d",
-          fontFamily: 'Arial, sans-serif',
-          fontSmoothing: "antialiased",
-          fontSize: "16px",
-          "::placeholder": {
-            color: "#32325d"
-          }
-        },
-        invalid: {
-          fontFamily: 'Arial, sans-serif',
-          color: "#fa755a",
-          iconColor: "#fa755a"
-        }
-      }
-      const card = elements.create("card", { 
-        hidePostalCode: true,
-        style: style 
-      })
-      card.mount("#card-element");
-      card.on("change", function (event) {
-        document.querySelector("button").disabled = event.empty
-        document.querySelector("#error").textContent = event.error ? event.error.message : ""
-      })
-      const form = document.getElementById("payment-form")
-      form.addEventListener("submit", function(event) {
-        event.preventDefault()
-        registerCard(stripe, card, data.result.client_secret)
-      })
-    })
 }
 
-const registerCard = function(stripe, card, clientSecret) {
-  console.log("card")
-  console.log(card)
-  loading(true)
-  stripe
-    .confirmCardSetup(clientSecret, {
-      payment_method: {
-        card: card
-      }
-    })
-    .then(function(result) {
-      console.log("card register result")
-      console.log(result)
-      if (result.error) {
-        showError(result.error.message);
-      } else {
-        attachCard(stripe, result.setupIntent.payment_method)
-      }
-    })
-}
-
-const attachCard = function(stripe, paymentMethodId)
+const pay = async function(stripe)
 {
-  fetch("/payment/attach-payment-to-customer", {
+  clearFormMessage()
+
+  const customerId = document.querySelector("#customer-id").value
+  if (!customerId) {
+    showError(`Invalid customer id: ${customerId}`)
+    return
+  }
+
+  const paymentMethodId = document.querySelector("#payment-method-id").value
+  if (!paymentMethodId) {
+    showError(`Invalid payment id: ${paymentMethodId}`)
+    return
+  }
+
+  const amount = document.querySelector("#amount").value
+  if (!amount) {
+    showError(`Invalid amount: ${amount}`)
+    return
+  }
+
+  await fetch("/payment/payment-intent", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
-      // payment_method_id: paymentMethod.id
-      payment_method_id: paymentMethodId
+      customer_id: customerId,
+      payment_method_id: paymentMethodId,
+      amount: amount
     })
   })
     .then(function(result) {
       return result.json()
     })
-    .then(function(data) {
-      console.log(data)
-      if (data.result.status == 'requires_action') {
-        handleCardAction(stripe, data.result)
+    .then(function(result) {
+      console.log(result)
+      if (result.error) {
+        showError(`${result.error.type} : ${result.error.raw.message}`)
+      } else if (result.intent.status == 'succeeded') {
+        showComplete(`payment_intent_id: ${result.intent.id}`)
+      } else if (result.intent.status == 'requires_action') {
+        handleCardAction(stripe, result.intent)
       } else {
-        console.log("done")
+        showError(`Error: ${result.intent.status}`)
       }
     })
 }
 
-const handleCardAction = function(stripe, intent) {
+const handleCardAction = async function(stripe, intent) {
   console.log("handleCardAction")
-  console.log(intent)
-  stripe.confirmCardPayment(
+  await stripe.confirmCardPayment(
     intent.client_secret
-  ).then(function(actionResult) {
-    console.log(actionResult)
+  ).then(function(result) {
+    console.log(result)
+    if (result.error) {
+      showError(result.error.message)
+    } else {
+      showComplete(`payment_intent_id: ${result.paymentIntent.id}`)
+    }
   })
 }
 

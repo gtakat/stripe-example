@@ -9,68 +9,42 @@ router.get('/', (req, res) => {
   res.render('payment/index')
 })
 
-router.post("/setup-intent", async (req, res) => {
-  const setupIntent = await stripe.setupIntents.create({
-    payment_method_types: ['card'],
-  });
+router.post("/payment-intent", async (req, res) => {
+  const { customer_id, payment_method_id, amount } = req.body;
+  let result = {
+    intent: null,
+    error: false
+  }
 
-  res.send({
-    result: setupIntent
-  })
-})
+  try {
+    let intent = await stripe.paymentIntents.create({
+      amount: amount,
+      currency: 'jpy',
+      payment_method_types: ['card'],
+      capture_method: 'automatic', 
+      // capture_method: 'manual', // デフォルト(automatic)だと caputureの呼び出しは不要
+      customer: customer_id,
+      payment_method: payment_method_id,
+      confirm: true  // falseだとconfirmの呼び出しが必要
+    })
+    console.log({status: intent.status})
 
-router.post("/attach-payment-to-customer", async (req, res) => {
-  const { payment_method_id } = req.body;
-
-  // customerが存在しない場合は、customerの作成+payment_methodの紐付け+デフォルトカード設定が同時に可能
-  const customer = await stripe.customers.create({
-    name: "からあげ", 
-    payment_method: payment_method_id,
-    invoice_settings: {
-      default_payment_method: payment_method_id
+    if (intent.status == 'requires_confirmation') {
+      intent = await stripe.paymentIntents.confirm(intent.id)
+      console.log({status: intent.status})
     }
-  })
 
-  // customerがすでに存在する場合はpayment_methodの紐付けを行う
+    if (intent.status == 'requires_capture') {
+      intent = await stripe.paymentIntents.capture(intent.id)
+      console.log({status: intent.status})
+    }
 
-  // payment_methodの紐付け
-  // const paymentMethod = await stripe.paymentMethods.attach(
-  //   payment_method_id,
-  //   {customer: customer.id}
-  // )
+    result.intent = intent
+  } catch (e) {
+    result.error = e
+  }
 
-  // デフォルトカード設定
-  // await stripe.customers.update(
-  //   customer.id,
-  //   {
-  //     invoice_settings: {
-  //       default_payment_method: payment_method_id
-  //     }
-  //   }
-  // )
-
-  const paymentIntent = await stripe.paymentIntents.create({
-    amount: 2000,
-    currency: 'jpy',
-    payment_method_types: ['card'],
-    capture_method: 'automatic', 
-    // capture_method: 'manual', // デフォルト(automatic)だと caputureの呼び出しは不要
-    customer: customer.id,
-    payment_method: payment_method_id,
-    confirm: true  // falseだとconfirmの呼び出しが必要
-  })
-  console.log({status: paymentIntent.status})
-
-  // const confirmResult = await stripe.paymentIntents.confirm(paymentIntent.id)
-  // console.log({status: confirmResult.status})
-
-  // const caputureResult = await stripe.paymentIntents.capture(paymentIntent.id)
-  // console.log({status: caputureResult.status})
-
-
-  res.send({
-    result: paymentIntent
-  })
+  res.send(result)
 })
 
 module.exports = router
