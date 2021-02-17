@@ -6,6 +6,12 @@
 docker-compose build
 ```
 
+## stripeへのログイン（初回のみ）
+
+```bash
+docker-compose run --rm stripe login
+```
+
 ## APIサーバの起動
 
 ```bash
@@ -23,8 +29,19 @@ docker-compose exec app npx webpack -w
 ## Webhookの開発
 
 ローカルにWebhookのエンドポイントを立てても、通常だとstripe側からコールできない。
+
 stripe-cliを利用すると、検知したイベントをローカルの任意のポートにフォワードできる。
+
+* [stripe-node - webhook-signing](https://github.com/stripe/stripe-node/tree/master/examples/webhook-signing)
 
 ```bash
 docker-compose run --rm stripe listen --forward-to app:8080/stripe_webhook
 ```
+
+listenを開始すると、webhook用のsecret keyが表示されるので、これを`.env`に追加する。
+
+```bash
+Ready! Your webhook signing secret is '{{WEBHOOK_SIGNING_SECRET}}' (^C to quit)
+```
+
+このキーはwebhookに送信されたイベントのシグネチャの検証に利用される。
