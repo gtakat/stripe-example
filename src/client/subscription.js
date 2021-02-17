@@ -52,8 +52,10 @@ const subscribeProduct = async function(stripe)
           showComplete(`subscription_id: ${result.subscription.id}`)
           showError('23時間以内にユーザのアクションが必要です')
         } else {
-          showError('unknown status')
+          showError('unknown payment_intent status')
         }
+      } else {
+        showError('unknown subscription status')
       }
     })
 }
