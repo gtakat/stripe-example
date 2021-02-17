@@ -8,7 +8,8 @@ module.exports = {
     card: './src/client/card.js',
     payment: './src/client/payment.js',
     refund: './src/client/refund.js',
-    subscription: './src/client/subscription.js'
+    subscription: './src/client/subscription.js',
+    subscription_cancel: './src/client/subscription_cancel.js',
   },
   output: {
     path: `${__dirname}/public/js`,
