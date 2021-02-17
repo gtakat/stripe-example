@@ -9,6 +9,7 @@ module.exports = {
     payment: './src/client/payment.js',
     refund: './src/client/refund.js',
     subscription: './src/client/subscription.js',
+    subscription_user_action: './src/client/subscription_user_action.js',
     subscription_cancel: './src/client/subscription_cancel.js',
   },
   output: {

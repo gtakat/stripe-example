@@ -1,0 +1,17 @@
+html 
+  head 
+    title= "Stripe Demo"
+    script(src="/js/subscription_user_action.js")
+    link(rel="stylesheet" href="/css/global.css")
+  body 
+    div(class="header-title") Stripe Demo - Subscription (User Action)
+    form(id="subscription-form")
+      div(class="input-title") Subscription ID
+      input(id="subscription-id" type="text")
+      
+      button(id="submit")
+        div(class="spinner hidden" id="spinner")
+        span(id="button-text") Confirm
+      
+      p(id="error" role="alert")
+      p(class="result-message")
