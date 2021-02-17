@@ -4,13 +4,14 @@ html
     script(src="/js/refund.js")
     link(rel="stylesheet" href="/css/global.css")
   body 
-    h1= "Stripe Demo - Refund"
+    div(class="header-title") Stripe Demo - Refund
     form(id="refund-form")
-      div(class="input-title")
-        =　"Payment Intent ID"
+      div(class="input-title") Payment Intent ID
       input(id="payment-intent-id" type="text")
+
       button(id="submit")
         div(class="spinner hidden" id="spinner")
         span(id="button-text") Refund
+      
       p(id="error" role="alert")
       p(class="result-message")

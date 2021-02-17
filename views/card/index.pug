@@ -4,14 +4,15 @@ html
     script(src="/js/card.js")
     link(rel="stylesheet" href="/css/global.css")
   body 
-    h1= "Stripe Demo - Card"
+    div(class="header-title") Stripe Demo - Card
     form(id="card-form")
-      div(class="input-title")
-        =　"Customer ID"
+      div(class="input-title") Customer ID
       input(id="customer-id" type="text")
+
       div(id="card-element")
       button(id="submit")
         div(class="spinner hidden" id="spinner")
         span(id="button-text") Register Card
+      
       p(id="error" role="alert")
       p(class="result-message")
