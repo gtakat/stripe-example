@@ -4,6 +4,7 @@ const customer_router = require('./router/customer')
 const card_router = require('./router/card')
 const payment_router = require('./router/payment')
 const refund_router = require('./router/refund')
+const subscription_router = require('./router/subscription')
 const stripe_webhook_router = require('./router/stripe_webhook')
 
 const app = express()
@@ -24,6 +25,7 @@ app.use('/customer', customer_router)
 app.use('/card', card_router)
 app.use('/payment', payment_router)
 app.use('/refund', refund_router)
+app.use('/subscription', subscription_router)
 app.use('/stripe_webhook', stripe_webhook_router)
 
 app.listen(port, () => {

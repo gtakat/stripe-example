@@ -7,7 +7,8 @@ module.exports = {
     customer: './src/client/customer.js',
     card: './src/client/card.js',
     payment: './src/client/payment.js',
-    refund: './src/client/refund.js'
+    refund: './src/client/refund.js',
+    subscription: './src/client/subscription.js'
   },
   output: {
     path: `${__dirname}/public/js`,

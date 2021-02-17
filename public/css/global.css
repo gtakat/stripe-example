@@ -35,6 +35,15 @@ input {
   background: white;
 }
 
+select {
+  margin-bottom: 6px;
+  padding: 12px;
+  height: 44px;
+  font-size: 16px;
+  width: 100%;
+  background: white;
+}
+
 .result-message {
   line-height: 22px;
   font-size: 16px;
