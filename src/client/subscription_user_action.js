@@ -64,7 +64,7 @@ const userAction = async function(stripe, paymentIntent)
       if (result.error) {
         showError(`${result.error.type} : ${result.error.raw.message}`)
       } else {
-        showComplete(`status : ${result.status}`)
+        showComplete(`status : ${result.paymentIntent.status}`)
       }
     })
 }
