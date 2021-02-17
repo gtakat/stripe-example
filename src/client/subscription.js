@@ -47,6 +47,13 @@ const subscribeProduct = async function(stripe)
         showError(`${result.error.type} : ${result.error.raw.message}`)
       } else if (result.subscription.status == 'active') {
         showComplete(`subscription_id: ${result.subscription.id}`)
+      } else if (result.subscription.status == 'incomplete') {
+        if (result.subscription.latest_invoice.payment_intent.status == "requires_action") {
+          showComplete(`subscription_id: ${result.subscription.id}`)
+          showError('23時間以内にユーザのアクションが必要です')
+        } else {
+          showError('unknown status')
+        }
       }
     })
 }
