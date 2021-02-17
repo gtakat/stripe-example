@@ -18,9 +18,17 @@ docker-compose run --rm stripe login
 docker-compose run app
 ```
 
-## webpack watch
+## webpack
 
 appが起動している状態で下記を実行
+
+### build
+
+```bash
+docker-compose exec app npx webpack
+```
+
+### watch
 
 ```bash
 docker-compose exec app npx webpack -w
