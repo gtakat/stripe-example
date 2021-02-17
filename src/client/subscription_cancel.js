@@ -14,7 +14,7 @@ const cancel = async function()
 
   const subscriptionId = document.querySelector("#subscription-id").value
   if (!subscriptionId) {
-    showError(`Invalid customer id: ${subscriptionId}`)
+    showError(`Invalid subscription id: ${subscriptionId}`)
     return
   }
 
