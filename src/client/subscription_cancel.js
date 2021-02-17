@@ -1,18 +1,14 @@
 import {loading, showComplete, showError, clearFormMessage} from './form'
-import {loadStripe} from '@stripe/stripe-js';
 
 async function init() {
-  const stripe_public_key = process.env.STRIPE_PUBLIC_KEY
-  const stripe = await loadStripe(stripe_public_key)
-
   const form = document.getElementById("subscription-form")
   form.addEventListener("submit", function(event) {
     event.preventDefault()
-    cancel(stripe)
+    cancel()
   })
 }
 
-const cancel = async function(stripe)
+const cancel = async function()
 {
   clearFormMessage()
 
