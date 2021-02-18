@@ -6,6 +6,7 @@ module.exports = {
   entry: {
     customer: './src/client/customer.js',
     card: './src/client/card.js',
+    card_detach: './src/client/card_detach.js',
     payment: './src/client/payment.js',
     refund: './src/client/refund.js',
     subscription: './src/client/subscription.js',
