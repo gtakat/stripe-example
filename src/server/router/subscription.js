@@ -2,7 +2,9 @@ const express = require('express');
 const { subscribe } = require('./customer');
 
 require('dotenv').config();
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY, {
+  apiVersion: '2020-08-27',
+})
 
 const router = express.Router()
 router.use(express.json());
