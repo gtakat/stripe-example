@@ -123,6 +123,7 @@ const updateCard = async function(stripe, payload)
       } else {
         showComplete(`payment_method_id : ${result.payment_method.id}`)
       }
+      loading(false)
     })
 }
 

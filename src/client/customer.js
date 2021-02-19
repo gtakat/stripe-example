@@ -41,5 +41,6 @@ async function createCustomer(event) {
       } else {
         showComplete(`customer_id : ${result.customer.id}`)
       }
+      loading(false)
     })
 }

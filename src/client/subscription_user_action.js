@@ -49,7 +49,6 @@ const confirm = async function(stripe)
       } else {
         showError('unknown subscription status')
       }
-      loading(false)
     })
 }
 
@@ -66,6 +65,7 @@ const userAction = async function(stripe, paymentIntent)
       } else {
         showComplete(`status : ${result.paymentIntent.status}`)
       }
+      loading(false)
     })
 }
 

@@ -41,5 +41,6 @@ async function refund(event) {
       } else {
         showComplete(`refund_id : ${result.refund.id}`)
       }
+      loading(false)
     })
 }

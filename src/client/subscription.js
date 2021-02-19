@@ -27,6 +27,8 @@ const subscribeProduct = async function(stripe)
     showError(`Invalid plan: ${priceId}`)
     return
   }
+  
+  loading(true)
 
   await fetch("/subscription/create-subscription", {
     method: "POST",
@@ -57,6 +59,7 @@ const subscribeProduct = async function(stripe)
       } else {
         showError('unknown subscription status')
       }
+      loading(false)
     })
 }
 

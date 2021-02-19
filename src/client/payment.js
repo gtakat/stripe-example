@@ -34,6 +34,8 @@ const pay = async function(stripe)
     return
   }
 
+  loading(true)
+
   await fetch("/payment/payment-intent", {
     method: "POST",
     headers: {
@@ -54,6 +56,7 @@ const pay = async function(stripe)
         showError(`${result.error.type} : ${result.error.raw.message}`)
       } else if (result.intent.status == 'succeeded') {
         showComplete(`payment_intent_id: ${result.intent.id}`)
+        loading(false)
       } else if (result.intent.status == 'requires_action') {
         handleCardAction(stripe, result.intent)
       } else {
@@ -73,6 +76,7 @@ const handleCardAction = async function(stripe, intent) {
     } else {
       showComplete(`payment_intent_id: ${result.paymentIntent.id}`)
     }
+    loading(false)
   })
 }
 
