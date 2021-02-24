@@ -53,3 +53,13 @@ Ready! Your webhook signing secret is '{{WEBHOOK_SIGNING_SECRET}}' (^C to quit)
 ```
 
 このキーはwebhookに送信されたイベントのシグネチャの検証に利用される。
+
+### 手動でイベントを発火する
+
+stripe-cliで任意の連続したイベントを発行できる。
+
+サンプル
+
+```bash
+docker-compose run --rm stripe trigger invoice.payment_succeeded
+```
