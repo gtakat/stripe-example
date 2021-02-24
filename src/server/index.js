@@ -10,6 +10,7 @@ const subscription_router = require('./router/subscription')
 const subscription_user_action_router = require('./router/subscription_user_action')
 const subscription_cancel_router = require('./router/subscription_cancel')
 const subscription_change_plan_router = require('./router/subscription_change_plan')
+const subscription_staged_price_router = require('./router/subscription_staged_price')
 const stripe_webhook_router = require('./router/stripe_webhook')
 
 const app = express()
@@ -36,6 +37,7 @@ app.use('/subscription', subscription_router)
 app.use('/subscription_user_action', subscription_user_action_router)
 app.use('/subscription_cancel', subscription_cancel_router)
 app.use('/subscription_change_plan', subscription_change_plan_router)
+app.use('/subscription_staged_price', subscription_staged_price_router)
 app.use('/stripe_webhook', stripe_webhook_router)
 
 app.listen(port, () => {

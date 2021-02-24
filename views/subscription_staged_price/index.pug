@@ -1,0 +1,20 @@
+html 
+  head 
+    title= "Stripe Demo"
+    script(src="/js/subscription_staged_price.js")
+    link(rel="stylesheet" href="/css/global.css")
+  body 
+    div(class="header-title") Stripe Demo - Subscription (Update Unit Amount)
+    form(id="subscription-form")
+      div(class="input-title") Subscription ID
+      input(id="subscription-id" type="text")
+      
+      div(class="input-title") ユニット数
+      input(id="unit-amount" type="text")
+      
+      button(id="submit")
+        div(class="spinner hidden" id="spinner")
+        span(id="button-text") Update Amount
+      
+      p(id="error" role="alert")
+      p(class="result-message")
