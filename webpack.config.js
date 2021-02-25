@@ -15,6 +15,7 @@ module.exports = {
     subscription_cancel: './src/client/subscription_cancel.js',
     subscription_change_plan: './src/client/subscription_change_plan.js',
     subscription_staged_price: './src/client/subscription_staged_price.js',
+    subscription_promotion_code: './src/client/subscription_promotion_code.js',
   },
   output: {
     path: `${__dirname}/public/js`,
