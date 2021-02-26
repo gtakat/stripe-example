@@ -27,6 +27,8 @@ const subscribeProduct = async function(stripe)
     showError(`Invalid plan: ${priceId}`)
     return
   }
+
+  const trialPeriodDays = document.querySelector("#trial-period-days").value
   
   loading(true)
 
@@ -37,7 +39,8 @@ const subscribeProduct = async function(stripe)
     },
     body: JSON.stringify({
       customer_id: customerId,
-      price_id: priceId
+      price_id: priceId,
+      trial_period_days: trialPeriodDays
     })
   })
     .then(function(result) {
@@ -56,6 +59,8 @@ const subscribeProduct = async function(stripe)
         } else {
           showError('unknown payment_intent status')
         }
+      } else if (result.subscription.status == 'trialing') {
+        showComplete(`subscription_id: ${result.subscription.id}`)
       } else {
         showError('unknown subscription status')
       }
