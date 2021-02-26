@@ -26,6 +26,7 @@ router.post('/create-subscription', async (req, res) => {
     const subscription = await stripe.subscriptions.create({
       customer: customer_id,
       items: [{ price: price_id }],
+      default_tax_rates: ['txr_1IBZAqIH8r0fTJ7pPAEnwMdM'],
       expand: ['latest_invoice.payment_intent']
     })
     result.subscription = subscription
