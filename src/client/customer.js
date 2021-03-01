@@ -20,6 +20,8 @@ async function createCustomer(event) {
     return
   }
 
+  const email = document.querySelector("#email").value
+
   loading(true)
 
   await fetch("/customer", {
@@ -28,7 +30,8 @@ async function createCustomer(event) {
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
-      name: userName
+      name: userName,
+      email: email
     })
   })
     .then(function(result) {

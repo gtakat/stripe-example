@@ -13,16 +13,18 @@ router.get('/', (req, res) => {
 })
 
 router.post("/", async (req, res) => {
-  const { name } = req.body
+  const { name, email } = req.body
   let result = {
     customer: null,
     error: false
   }
 
   try {
-    const customer = await stripe.customers.create({
-      name
-    })
+    const params = { name }
+    if (email) {
+      params.email = email
+    }
+    const customer = await stripe.customers.create(params)
     result.customer = customer
   } catch (e) {
     result.error = e
