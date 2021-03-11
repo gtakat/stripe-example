@@ -23,6 +23,21 @@ body {
   font-weight: bold;
 }
 
+.top-menu {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 18px;
+  line-height: 2.5em;
+  width: 60vw;
+  align-self: center;
+  margin-bottom: 90px;
+}
+
+.top-menu > .top-menu-item {
+  width: 50%;
+  list-style: none;
+}
+
 form {
   width: 30vw;
   min-width: 500px;
@@ -193,4 +208,8 @@ button:disabled {
   font-size: 14px;
   font-weight: bold;
   margin-bottom: 6px;
+}
+
+ul li {
+
 }

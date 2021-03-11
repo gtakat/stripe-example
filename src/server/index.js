@@ -1,5 +1,6 @@
 const { request } = require('express');
 const express = require('express')
+const top_router = require('./router/index')
 const customer_router = require('./router/customer')
 const card_router = require('./router/card')
 const card_change_router = require('./router/card_change')
@@ -28,6 +29,7 @@ app.set('view engine', 'pug')
 app.use(express.static('public'))
 
 // routing
+app.use('/', top_router)
 app.use('/customer', customer_router)
 app.use('/card', card_router)
 app.use('/card_change', card_change_router)
