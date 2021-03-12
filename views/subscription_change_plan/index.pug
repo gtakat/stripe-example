@@ -12,10 +12,8 @@ html
       div(class="input-title") Plan
       select(id="plan")
         option(value='')
-        option(value='price_1ILRTcIH8r0fTJ7pjuvOk1yo') ベーシックプラン(¥900/月)
-        option(value='price_1ILRTqIH8r0fTJ7pR0umSPuo') プレミアムプラン(¥3000/月)
-        option(value='price_1ILqe4IH8r0fTJ7pjfFOQzP7') 毎日50円プラン(¥50/日)
-        option(value='price_1IMA9GIH8r0fTJ7pN3xJWrxm') 毎日100円プラン(¥100/日)
+        each product in products
+          option(value= product.price_id)= product.name
       
       button(id="submit")
         div(class="spinner hidden" id="spinner")
