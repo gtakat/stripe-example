@@ -1,5 +1,24 @@
 # stripe-example
 
+Stripeによる各種処理の実行サンプル
+
+## サンプル説明
+
+| Path | 機能 |
+|-----|-----|
+|/customer|カスタマー（顧客）の作成|
+|/card|クレジットカード登録|
+|/card_change|クレジットカード変更|
+|/card_detach|クレジットカード削除（デタッチ）|
+|/payment|都度決済|
+|/refund|返金|
+|/subscription|定期支払い（サブスクリプション）|
+|/subscription_cancel|定期支払いの解約|
+|/subscription_change_plan|定期支払いの商品（コース）変更|
+|/subscription_promotion_code|定期支払いプロモーションコードの適用|
+|/subscription_staged_price|従量課金プランの使用量の反映|
+|/subscription_user_action|3Dセキュアの対応が必要な場合のユーザ操作画面|
+
 ## 初期設定
 
 ### .envの設定
