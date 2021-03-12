@@ -2,6 +2,20 @@
 
 ## 初期設定
 
+### .envの設定
+
+`.env.example` をコピーして、 `.env` を作成。
+
+`.env` にStripeの各種キーを設定する。
+
+### 商品情報の設定
+
+`products.yaml.example` をコピーして、 `products.yaml` を作成。
+
+[商品ページ](https://dashboard.stripe.com/test/products)で追加した商品の、商品名とprice_idをyamlに設定する。この設定はsubscriptionのサンプル実行時に利用される。
+
+## docker build
+
 ```bash
 docker-compose build
 ```
