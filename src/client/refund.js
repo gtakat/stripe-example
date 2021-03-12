@@ -7,7 +7,7 @@ async function init() {
 
 window.addEventListener('DOMContentLoaded', (event) => {
   init()
-});
+})
 
 async function refund(event) {
   event.preventDefault()

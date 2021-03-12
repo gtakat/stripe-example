@@ -1,6 +1,6 @@
 const express = require('express')
 
-require('dotenv').config();
+require('dotenv').config()
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY, {
   apiVersion: '2020-08-27',
 })
@@ -37,13 +37,13 @@ router.post("/", express.raw({type: 'application/json'}), async (req, res) => {
       // Used to provision services after the trial has ended.
       // The status of the invoice will show up as paid. Store the status in your
       // database to reference when a user accesses your service to avoid hitting rate limits.
-      break;
+      break
     case 'invoice.payment_failed':
       // If the payment fails or the customer does not have a valid payment method,
       //  an invoice.payment_failed event is sent, the subscription becomes past_due.
       // Use this webhook to notify your user that their payment has
       // failed and to retrieve new card details.
-      break;
+      break
     case 'customer.subscription.deleted':
       if (event.request != null) {
         // handle a subscription cancelled by your request
@@ -52,7 +52,7 @@ router.post("/", express.raw({type: 'application/json'}), async (req, res) => {
         // handle subscription cancelled automatically based
         // upon your subscription settings.
       }
-      break;
+      break
     default:
     // Unexpected event type
   }

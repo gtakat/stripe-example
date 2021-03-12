@@ -1,5 +1,5 @@
-const { request } = require('express');
 const express = require('express')
+
 const top_router = require('./router/index')
 const customer_router = require('./router/customer')
 const card_router = require('./router/card')

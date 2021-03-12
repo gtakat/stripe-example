@@ -1,5 +1,5 @@
 import {loading, showComplete, showError, clearFormMessage} from './form'
-import {loadStripe} from '@stripe/stripe-js';
+import {loadStripe} from '@stripe/stripe-js'
 
 async function init() {
   const stripe_public_key = process.env.STRIPE_PUBLIC_KEY

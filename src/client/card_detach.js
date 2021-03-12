@@ -10,7 +10,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 })
 
 async function createCustomer(event) {
-  event.preventDefault();
+  event.preventDefault()
 
   clearFormMessage()
 

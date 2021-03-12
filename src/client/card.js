@@ -1,5 +1,5 @@
 import {loading, showComplete, showError, clearFormMessage} from './form'
-import {loadStripe} from '@stripe/stripe-js';
+import {loadStripe} from '@stripe/stripe-js'
 
 async function init() {
   const stripe_public_key = process.env.STRIPE_PUBLIC_KEY
@@ -22,7 +22,7 @@ async function init() {
       if (result.error) {
         showError(`${result.error.type} : ${result.error.raw.message}`)
       } else {
-        const elements = stripe.elements();
+        const elements = stripe.elements()
         const style = {
           base: {
             color: "#32325d",
@@ -43,7 +43,7 @@ async function init() {
           hidePostalCode: true,
           style: style 
         })
-        card.mount("#card-element");
+        card.mount("#card-element")
         card.on("change", function (event) {
           document.querySelector("button").disabled = event.empty
           document.querySelector("#error").textContent = event.error ? event.error.message : ""
@@ -78,7 +78,7 @@ const registerCard = async function(stripe, card, clientSecret) {
       })
       .then(function(result) {
         if (result.error) {
-          showError(result.error.message);
+          showError(result.error.message)
         } else {
           attachCard(stripe, {
             customer_id: customerId,

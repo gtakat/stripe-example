@@ -1,12 +1,12 @@
 const express = require('express')
 
-require('dotenv').config();
+require('dotenv').config()
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY, {
   apiVersion: '2020-08-27',
 })
 
 const router = express.Router()
-router.use(express.json());
+router.use(express.json())
 
 router.get('/', (req, res) => {
   res.render('card_change/index')
@@ -31,7 +31,7 @@ router.post("/setup-intent", async (req, res) => {
 })
 
 router.post("/update-payment-method", async (req, res) => {
-  const { customer_id, payment_method_id, new_payment_method_id } = req.body;
+  const { customer_id, payment_method_id, new_payment_method_id } = req.body
   let result = {
     customer: null,
     payment_method: null,
