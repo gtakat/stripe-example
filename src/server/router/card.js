@@ -40,7 +40,7 @@ router.post("/attach-payment-to-customer", async (req, res) => {
 
   // customerが存在しない場合は、customerの作成+payment_methodの紐付け+デフォルトカード設定が同時に可能
   // const customer = await stripe.customers.create({
-  //   name: "帆立 太郎", 
+  //   name: "テスト氏名", 
   //   payment_method: payment_method_id,
   //   invoice_settings: {
   //     default_payment_method: payment_method_id
