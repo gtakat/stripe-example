@@ -1,6 +1,0 @@
----
-- name: ベーシックプラン
-  price_id: price_xxxxxxxxxx
-
-- name: プレミアムプラン
-  price_id: price_xxxxxxxxxx

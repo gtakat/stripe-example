@@ -1,6 +1,4 @@
 const express = require('express')
-const fs = require('fs')
-const yaml = require('js-yaml')
 
 require('dotenv').config()
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY, {
@@ -11,7 +9,7 @@ const router = express.Router()
 router.use(express.json())
 
 router.get('/', (req, res) => {
-  const products = yaml.load(fs.readFileSync('/var/app/products.yaml', 'utf8'));
+  const products = require('/var/app/config.json')['products']
   res.render('subscription/index', { products })
 })
 

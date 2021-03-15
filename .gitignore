@@ -3,4 +3,4 @@ node_modules/
 public/js/
 .env
 .config/
-products.yaml
+config.json
