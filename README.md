@@ -45,7 +45,7 @@ docker-compose build
 docker-compose run --rm stripe login
 ```
 
-## APIサーバの起動
+## APPサーバの起動
 
 ```bash
 docker-compose run app
