@@ -29,9 +29,11 @@ Stripeによる各種処理の実行サンプル
 
 ### 商品情報の設定
 
-`products.yaml.example` をコピーして、 `products.yaml` を作成。
+`config.json.example` をコピーして、 `config.json` を作成。
 
-[商品ページ](https://dashboard.stripe.com/test/products)で追加した商品の、商品名とprice_idをyamlに設定する。この設定はsubscriptionのサンプル実行時に利用される。
+[商品ページ](https://dashboard.stripe.com/test/products)で追加した商品の、商品名とprice_idを `config.json` の `products` に設定する。この設定はsubscriptionのサンプル実行時に利用される。
+
+合わせて、[税率ページ](https://dashboard.stripe.com/test/tax-rates)で、消費税の設定を追加し、税率IDを `config.json` の `default_tax_rates` に追加する。
 
 ## docker build
 
