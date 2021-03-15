@@ -8,5 +8,8 @@
       "name": "プレミアムプラン",
       "price_id": "price_xxxxxxxxxx"
     }
+  ],
+  "default_tax_rates": [
+    "txr_xxxxxxxxxx"
   ]
 }
