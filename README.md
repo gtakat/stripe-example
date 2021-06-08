@@ -50,7 +50,7 @@ docker-compose run --rm stripe login
 ## APPサーバの起動
 
 ```bash
-docker-compose run app
+docker-compose up app
 ```
 
 ## webpack
