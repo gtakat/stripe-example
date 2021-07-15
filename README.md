@@ -77,6 +77,16 @@ stripe-cliを利用すると、検知したイベントをローカルの任意�
 
 * [stripe-node - webhook-signing](https://github.com/stripe/stripe-node/tree/master/examples/webhook-signing)
 
+### 初回はログインが必要
+
+```bash
+docker-compose run --rm stripe login
+```
+
+実行するとコンソールに認証用のURLが表示されるのでブラウザからアクセスする。
+
+### listen
+
 ```bash
 docker-compose run --rm stripe listen --forward-to app:8080/stripe_webhook
 ```
